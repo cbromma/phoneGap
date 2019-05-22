@@ -2,20 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="10b41d2a-dbd6-4ed6-9e89-18c358690810" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/MyApp/platforms/android/android.json" beforeDir="false" afterPath="$PROJECT_DIR$/MyApp/platforms/android/android.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyApp/platforms/android/app/src/main/assets/www/css/jquery.mobile-1.4.5.min.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyApp/platforms/android/app/src/main/assets/www/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/MyApp/platforms/android/app/src/main/assets/www/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyApp/platforms/android/app/src/main/assets/www/js/jquery-1.11.1.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyApp/platforms/android/app/src/main/assets/www/js/jquery.mobile-1.4.5.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyApp/platforms/browser/browser.json" beforeDir="false" afterPath="$PROJECT_DIR$/MyApp/platforms/browser/browser.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyApp/platforms/browser/www/css/jquery.mobile-1.4.5.min.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyApp/platforms/browser/www/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/MyApp/platforms/browser/www/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyApp/platforms/browser/www/js/jquery-1.11.1.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyApp/platforms/browser/www/js/jquery.mobile-1.4.5.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyApp/www/css/jquery.mobile-1.4.5.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/MyApp/www/jquery.mobile-1.4.5.min.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MyApp/www/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/MyApp/www/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyApp/www/js/jquery-1.11.1.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyApp/www/js/jquery.mobile-1.4.5.min.js" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -31,8 +18,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/MyApp/www/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-187">
-              <caret line="63" column="43" selection-start-line="63" selection-start-column="43" selection-end-line="63" selection-end-column="43" />
+            <state relative-caret-position="187">
+              <caret line="64" column="31" selection-start-line="64" selection-start-column="31" selection-end-line="64" selection-end-column="31" />
             </state>
           </provider>
         </entry>
@@ -105,6 +92,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
@@ -140,12 +128,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1558547917305</updated>
-      <workItem from="1558547918685" duration="1622000" />
+      <workItem from="1558547918685" duration="1910000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1622000" />
+    <option name="totallyTimeSpent" value="1910000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
@@ -176,8 +164,8 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/MyApp/www/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-187">
-          <caret line="63" column="43" selection-start-line="63" selection-start-column="43" selection-end-line="63" selection-end-column="43" />
+        <state relative-caret-position="187">
+          <caret line="64" column="31" selection-start-line="64" selection-start-column="31" selection-end-line="64" selection-end-column="31" />
         </state>
       </provider>
     </entry>

@@ -9,42 +9,93 @@
     <script type="text/javascript" src="jquery.mobile-1.4.5.min.js"></script>
 
     <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
-    <script type="text/javascript" charset="utf-8">
+	  <script type="text/javascript" charset="utf-8">
 
-    // Wait for device API libraries to load
-    //
-    document.addEventListener("deviceready", onDeviceReady, false);
+		  // Wait for device API libraries to load
+		  //
+		  document.addEventListener("deviceready", onDeviceReady, false);
 
-    // device APIs are available
-    //
-    function onDeviceReady() {
-        navigator.geolocation.getCurrentPosition(onSuccess, onError);
-    }
+		  // device APIs are available
+		  //
+		  function onDeviceReady() {
+			  navigator.geolocation.getCurrentPosition(onSuccess, onError);
+		  }
 
-    // onSuccess Geolocation
-    //
-    function onSuccess(position) {
-        var element = document.getElementById('geolocation');
-        element.innerHTML = 'Latitude: '           + position.coords.latitude              + '<br />' +
-                            'Longitude: '          + position.coords.longitude             + '<br />' +
-                            'Altitude: '           + position.coords.altitude              + '<br />' +
-                            'Accuracy: '           + position.coords.accuracy              + '<br />' +
-                            'Altitude Accuracy: '  + position.coords.altitudeAccuracy      + '<br />' +
-                            'Heading: '            + position.coords.heading               + '<br />' +
-                            'Speed: '              + position.coords.speed                 + '<br />' +
-                            'Timestamp: '          + position.timestamp                    + '<br />';
-    }
+		  // onSuccess Geolocation
+		  //
+		  function onSuccess(position) {
+			  var element = document.getElementById('geolocation');
+			  element.innerHTML = 'Latitude: '           + position.coords.latitude              + '<br />' +
+					  'Longitude: '          + position.coords.longitude             + '<br />' +
+					  'Altitude: '           + position.coords.altitude              + '<br />' +
+					  'Accuracy: '           + position.coords.accuracy              + '<br />' +
+					  'Altitude Accuracy: '  + position.coords.altitudeAccuracy      + '<br />' +
+					  'Heading: '            + position.coords.heading               + '<br />' +
+					  'Speed: '              + position.coords.speed                 + '<br />' +
+					  'Timestamp: '          + position.timestamp                    + '<br />';
+		  }
 
-    // onError Callback receives a PositionError object
-    //
-    function onError(error) {
-        alert('code: '    + error.code    + '\n' +
-              'message: ' + error.message + '\n');
-    }
+		  // onError Callback receives a PositionError object
+		  //
+		  function onError(error) {
+			  alert('code: '    + error.code    + '\n' +
+					  'message: ' + error.message + '\n');
+		  }
 
-    </script>
+	  </script>
+    
   </head>
   <body>
-    <p id="geolocation">Finding geolocation...</p>
+    
+<!-- Start of first page -->
+<div data-role="page" id="main">
+
+	<div data-role="header">
+		<h1>GeoAPP3000</h1>
+	</div><!-- /header -->
+
+	<div role="main" class="ui-content">
+		<p id="geolocation">Finding geolocation...</p>
+
+	</div><!-- /content -->
+
+	<div data-role="footer">
+		<a href="#bar">Seite 2</a>
+		<a href="#" id="target">test button</a>
+		<h3>by Jonas, Niklas und Chris</h3>
+	</div><!-- /footer -->
+</div><!-- /page -->
+
+<!-- Start of second page -->
+<div data-role="page" id="bar">
+
+	<div data-role="header">
+		<h1>Gespeicherte Läufe</h1>
+	</div><!-- /header -->
+
+	<div role="main" class="ui-content">
+		<p>Hier stehen alle Läufe</p>
+		<p><a href="#main">Back to main</a></p>
+	</div><!-- /content -->
+
+	<div data-role="footer">
+		<a href="#main">Startseite</a>
+	</div><!-- /footer -->
+</div><!-- /page -->
+
+<script>
+// Wait for device API libraries to load
+
+
+	$(function(){
+		$( "#target" ).bind( "tap", tapHandler );
+
+		function tapHandler( event ){
+			$( event.target ).addClass( "tap" );
+			alert("geklickt");
+		}
+	});
+</script>
+
   </body>
 </html>

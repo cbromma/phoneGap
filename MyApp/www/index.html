@@ -4,30 +4,65 @@
     <title>GeoApp</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="stylesheet" href="../css/jquery.mobile-1.4.5.min.css" />
-    <script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
-    <script type="text/javascript" src="../js/jquery.mobile-1.4.5.min.js"></script>
+    <link rel="stylesheet" href="jquery.mobile-1.4.5.min.css" />
+    <script type="text/javascript" src="jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="jquery.mobile-1.4.5.min.js"></script>
 
     <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+	  <script type="text/javascript" charset="utf-8">
+
+		  // Wait for device API libraries to load
+		  //
+		  document.addEventListener("deviceready", onDeviceReady, false);
+
+		  // device APIs are available
+		  //
+		  function onDeviceReady() {
+			  navigator.geolocation.getCurrentPosition(onSuccess, onError);
+		  }
+
+		  // onSuccess Geolocation
+		  //
+		  function onSuccess(position) {
+			  var element = document.getElementById('geolocation');
+			  element.innerHTML = 'Latitude: '           + position.coords.latitude              + '<br />' +
+					  'Longitude: '          + position.coords.longitude             + '<br />' +
+					  'Altitude: '           + position.coords.altitude              + '<br />' +
+					  'Accuracy: '           + position.coords.accuracy              + '<br />' +
+					  'Altitude Accuracy: '  + position.coords.altitudeAccuracy      + '<br />' +
+					  'Heading: '            + position.coords.heading               + '<br />' +
+					  'Speed: '              + position.coords.speed                 + '<br />' +
+					  'Timestamp: '          + position.timestamp                    + '<br />';
+		  }
+
+		  // onError Callback receives a PositionError object
+		  //
+		  function onError(error) {
+			  alert('code: '    + error.code    + '\n' +
+					  'message: ' + error.message + '\n');
+		  }
+
+	  </script>
     
   </head>
   <body>
     
 <!-- Start of first page -->
-<div data-role="page" id="foo">
+<div data-role="page" id="main">
 
 	<div data-role="header">
-		<h1>Foo</h1>
+		<h1>GeoAPP3000</h1>
 	</div><!-- /header -->
 
 	<div role="main" class="ui-content">
 		<p id="geolocation">Finding geolocation...</p>
-		<p>View internal page called <a href="#bar" data-role="button">bar</a></p>
+
 	</div><!-- /content -->
 
 	<div data-role="footer">
 		<a href="#bar">Seite 2</a>
-		<a href="#" id="target">JS</a>
+		<a href="#" id="target">test button</a>
+		<h3>by Jonas, Niklas und Chris</h3>
 	</div><!-- /footer -->
 </div><!-- /page -->
 
@@ -35,59 +70,30 @@
 <div data-role="page" id="bar">
 
 	<div data-role="header">
-		<h1>Bar</h1>
+		<h1>Gespeicherte Läufe</h1>
 	</div><!-- /header -->
 
 	<div role="main" class="ui-content">
-		<p>I'm the second in the source order so I'm hidden when the page loads. I'm just shown if a link that references my id is beeing clicked.</p>
-		<p><a href="#foo">Back to foo</a></p>
+		<p>Hier stehen alle Läufe</p>
+		<p><a href="#main">Back to main</a></p>
 	</div><!-- /content -->
 
 	<div data-role="footer">
-		<a href="#foo">Seite 2</a>
+		<a href="#main">Startseite</a>
 	</div><!-- /footer -->
 </div><!-- /page -->
 
 <script>
 // Wait for device API libraries to load
-    //
-    document.addEventListener("deviceready", onDeviceReady, false);
-
-    // device APIs are available
-    //
-    function onDeviceReady() {
-        navigator.geolocation.getCurrentPosition(onSuccess, onError);
-    }
-
-    // onSuccess Geolocation
-    //
-    function onSuccess(position) {
-        var element = document.getElementById('geolocation');
-        element.innerHTML = 'Latitude: '           + position.coords.latitude              + '<br />' +
-                            'Longitude: '          + position.coords.longitude             + '<br />' +
-                            'Altitude: '           + position.coords.altitude              + '<br />' +
-                            'Accuracy: '           + position.coords.accuracy              + '<br />' +
-                            'Altitude Accuracy: '  + position.coords.altitudeAccuracy      + '<br />' +
-                            'Heading: '            + position.coords.heading               + '<br />' +
-                            'Speed: '              + position.coords.speed                 + '<br />' +
-                            'Timestamp: '          + position.timestamp                    + '<br />';
-    }
-
-    // onError Callback receives a PositionError object
-    //
-    function onError(error) {
-        alert('code: '    + error.code    + '\n' +
-              'message: ' + error.message + '\n');
-    }
 
 
 	$(function(){
-  	$( "#target" ).bind( "tap", tapHandler );
- 
-  	function tapHandler( event ){
-    	$( event.target ).addClass( "tap" );
-	alert("geklickt");
- 	 }
+		$( "#target" ).bind( "tap", tapHandler );
+
+		function tapHandler( event ){
+			$( event.target ).addClass( "tap" );
+			alert("geklickt");
+		}
 	});
 </script>
 

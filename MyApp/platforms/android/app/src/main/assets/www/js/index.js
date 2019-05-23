@@ -20,8 +20,22 @@ var app = {
         navigator.geolocation.getCurrentPosition(this.onSuccess, this.onError);
     },
     
+    // test button -> camera function
     tapHandler: function(event){
-		alert("geklickt");
+		//alert("geklickt");
+		navigator.camera.getPicture(app.onCameraSuccess, app.onCameraFail, { quality: 50,
+		    destinationType: Camera.DestinationType.DATA_URL
+		});
+    },
+    
+    onCameraSuccess: function(imageData) {
+        var image = document.getElementById('myImage');
+        image.src = "data:image/jpeg;base64," + imageData;
+        alert("loaded");
+    },
+
+    onCameraFail: function(message) {
+        alert('Failed because: ' + message);
     },
 
 	 // onSuccess Geolocation
@@ -52,7 +66,28 @@ var app = {
         receivedElement.setAttribute('style', 'display:block;');
 
         console.log('Received Event: ' + id);
-    }
+    },
+	
+	
+	
+	GoogleMap: function(){
+
+		initializeMap = function(){
+		var map = showMap();
+		}
+
+		var showMap = function(){
+		var mapOptions = {
+		zoom: 4,
+		center: new google.maps.LatLng(-33, 151),
+		mapTypeId: google.maps.MapTypeId.ROADMAP
+		}
+
+		var map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+
+		return map;
+		}
+	}
 };
 
 app.initialize();

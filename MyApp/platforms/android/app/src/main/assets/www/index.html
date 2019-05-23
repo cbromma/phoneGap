@@ -6,11 +6,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <link rel="stylesheet" href="./css/jquery.mobile-1.4.5.min.css" />
+<link rel="stylesheet" href="./css/index.css" />
 
 <script type="text/javascript" src="./js/index.js"></script>
 <script type="text/javascript" src="./js/jquery-1.11.1.min.js"></script>
 <script type="text/javascript" src="./js/jquery.mobile-1.4.5.min.js"></script>
 <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+<link href="http://code.google.com/apis/maps/documentation/javascript/examples/default.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
 
@@ -24,6 +28,11 @@
 
 		<div role="main" class="ui-content">
 			<p id="geolocation">Finding geolocation...</p>
+			
+			<img id="myImage" alt="" src="">
+
+			<div id="map_canvas">
+			</div>
 
 		</div>
 		<!-- /content -->

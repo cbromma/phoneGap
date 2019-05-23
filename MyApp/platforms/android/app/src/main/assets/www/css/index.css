@@ -68,6 +68,7 @@ h1 {
     overflow:visible;
     padding:0px;
     text-align:center;
+    color: darkred;
 }
 
 .event {
@@ -105,7 +106,13 @@ h1 {
     animation:fade 3000ms infinite;
     -webkit-animation:fade 3000ms infinite;
 }
-
+#footer{
+    text-align:center;
+    color: darkred;
+}
+#main{
+    color: darkred;
+}
 #myImage {
 	 width: 100%;
 }

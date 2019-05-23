@@ -17,18 +17,25 @@ var app = {
     
     onDeviceReady: function() {
         $("#target").bind("tap", app.tapHandler);
+
         //navigator.geolocation.getCurrentPosition(this.onSuccess, this.onError);
         navigator.geolocation.watchPosition(this.onSuccess, this.onError);
 
-        var map;
+        //map
+        $("#start").bind("tap", app.mapStarter);
 
+    },
+
+    //start the map
+    mapStarter: function(event){
+       var map;
         var position = {lat: 48, lng: 9.3};
         // The map, center at position
         map = new google.maps.Map(document.getElementById('map'), {zoom: 4, center: position});
         // The marker
         var marker = new google.maps.Marker({position: position, map: map});
     },
-    
+
     // test button -> camera function
     tapHandler: function(event){
 		//alert("geklickt");

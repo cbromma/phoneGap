@@ -1,102 +1,62 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>GeoApp</title>
-	<meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+<title>GeoApp</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="stylesheet" href="./css/jquery.mobile-1.4.5.min.css" />
-    <script type="text/javascript" src="./js/jquery-1.11.1.min.js"></script>
-    <script type="text/javascript" src="./js/jquery.mobile-1.4.5.min.js"></script>
+<link rel="stylesheet" href="./css/jquery.mobile-1.4.5.min.css" />
 
-    <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
-	  <script type="text/javascript" charset="utf-8">
+<script type="text/javascript" src="./js/index.js"></script>
+<script type="text/javascript" src="./js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="./js/jquery.mobile-1.4.5.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+</head>
+<body>
 
-		  // Wait for device API libraries to load
-		  //
-		  document.addEventListener("deviceready", onDeviceReady, false);
+	<!-- Start of first page -->
+	<div data-role="page" id="main">
 
-		  // device APIs are available
-		  //
-		  function onDeviceReady() {
-			  navigator.geolocation.getCurrentPosition(onSuccess, onError);
-		  }
+		<div data-role="header">
+			<h1>Jogging-Support</h1>
+		</div>
+		<!-- /header -->
 
-		  // onSuccess Geolocation
-		  //
-		  function onSuccess(position) {
-			  var element = document.getElementById('geolocation');
-			  element.innerHTML = 'Latitude: '           + position.coords.latitude              + '<br />' +
-					  'Longitude: '          + position.coords.longitude             + '<br />' +
-					  'Altitude: '           + position.coords.altitude              + '<br />' +
-					  'Accuracy: '           + position.coords.accuracy              + '<br />' +
-					  'Altitude Accuracy: '  + position.coords.altitudeAccuracy      + '<br />' +
-					  'Heading: '            + position.coords.heading               + '<br />' +
-					  'Speed: '              + position.coords.speed                 + '<br />' +
-					  'Timestamp: '          + position.timestamp                    + '<br />';
-		  }
+		<div role="main" class="ui-content">
+			<p id="geolocation">Finding geolocation...</p>
 
-		  // onError Callback receives a PositionError object
-		  //
-		  function onError(error) {
-			  alert('code: '    + error.code    + '\n' +
-					  'message: ' + error.message + '\n');
-		  }
+		</div>
+		<!-- /content -->
 
-	  </script>
-    
-  </head>
-  <body>
-    
-<!-- Start of first page -->
-<div data-role="page" id="main">
+		<div data-role="footer">
+			<a href="#bar">Seite 2</a> <a href="#" id="target">test</a>
+			<p>Powered by Drinking-Support.com</p>
+		</div>
+		<!-- /footer -->
+	</div>
+	<!-- /page -->
 
-	<div data-role="header">
-		<h1>GeoAPP3000</h1>
-	</div><!-- /header -->
+	<!-- Start of second page -->
+	<div data-role="page" id="bar">
 
-	<div role="main" class="ui-content">
-		<p id="geolocation">Finding geolocation...</p>
+		<div data-role="header">
+			<h1>Gespeicherte Läufe</h1>
+		</div>
+		<!-- /header -->
 
-	</div><!-- /content -->
+		<div role="main" class="ui-content">
+			<p>Hier stehen alle Läufe</p>
+			<p>
+				<a href="#main">Back to main</a>
+			</p>
+		</div>
+		<!-- /content -->
 
-	<div data-role="footer">
-		<a href="#bar">Seite 2</a>
-		<a href="#" id="target">test</a>
-		<p>Powerd by Drinking-Support</p>
-	</div><!-- /footer -->
-</div><!-- /page -->
-
-<!-- Start of second page -->
-<div data-role="page" id="bar">
-
-	<div data-role="header">
-		<h1>Gespeicherte Läufe</h1>
-	</div><!-- /header -->
-
-	<div role="main" class="ui-content">
-		<p>Hier stehen alle Läufe</p>
-		<p><a href="#main">Back to main</a></p>
-	</div><!-- /content -->
-
-	<div data-role="footer">
-		<a href="#main">Startseite</a>
-	</div><!-- /footer -->
-</div><!-- /page -->
-
-<script>
-// Wait for device API libraries to load
-
-
-	$(function(){
-		$( "#target" ).bind( "tap", tapHandler );
-
-		function tapHandler( event ){
-			$( event.target ).addClass( "tap" );
-			alert("geklickt");
-		}
-	});
-</script>
-
-  </body>
+		<div data-role="footer">
+			<a href="#main">Startseite</a>
+		</div>
+		<!-- /footer -->
+	</div>
+	<!-- /page -->
+</body>
 </html>

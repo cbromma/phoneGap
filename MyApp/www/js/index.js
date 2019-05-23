@@ -18,6 +18,13 @@ var app = {
     onDeviceReady: function() {
         $("#target").bind("tap", app.tapHandler);
         navigator.geolocation.getCurrentPosition(this.onSuccess, this.onError);
+
+        var map;
+
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: {lat: -34.397, lng: 150.644},
+            zoom: 8
+        });
     },
     
     // test button -> camera function
@@ -70,24 +77,8 @@ var app = {
 	
 	
 	
-	GoogleMap: function(){
 
-		initializeMap = function(){
-		var map = showMap();
-		}
 
-		var showMap = function(){
-		var mapOptions = {
-		zoom: 4,
-		center: new google.maps.LatLng(-33, 151),
-		mapTypeId: google.maps.MapTypeId.ROADMAP
-		}
-
-		var map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
-
-		return map;
-		}
-	}
 };
 
 app.initialize();

@@ -2,12 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="10b41d2a-dbd6-4ed6-9e89-18c358690810" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/MyApp/.idea/encodings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyApp/.idea/libraries/TestLib.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyApp/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyApp/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyApp/.idea/workspace.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyApp/www/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/MyApp/www/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -53,7 +48,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="-12" />
     <option name="y" value="-12" />
     <option name="width" value="1890" />
@@ -107,6 +102,10 @@
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
   </component>
   <component name="RecentsManager">
+    <key name="OPEN_URL_DIALOG">
+      <recent name="http://github.com/cbromma/phoneGap.git" />
+      <recent name="https://github.com/cbromma/phoneGap.git" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Christopher Bromma\Documents\Studium\4. Semester\E-Business\PhoneGap\projekt\phoneGap\MyApp\www" />
     </key>
@@ -133,12 +132,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1558547917305</updated>
-      <workItem from="1558547918685" duration="2125000" />
+      <workItem from="1558547918685" duration="2584000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="2125000" />
+    <option name="totallyTimeSpent" value="2584000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
@@ -167,6 +166,12 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="https://github.com/cbromma/phoneGap.git">
+      <provider selected="true" editor-type-id="httpFileEditor" />
+    </entry>
+    <entry file="http://github.com/cbromma/phoneGap.git">
+      <provider selected="true" editor-type-id="httpFileEditor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/MyApp/www/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">

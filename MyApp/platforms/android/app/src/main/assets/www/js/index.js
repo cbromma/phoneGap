@@ -16,10 +16,12 @@ var app = {
     },
     
     onDeviceReady: function() {
+        //camera
         $("#target").bind("tap", app.tapHandler);
 
         //navigator.geolocation.getCurrentPosition(this.onSuccess, this.onError);
         navigator.geolocation.watchPosition(this.onSuccess, this.onError);
+
 
         //map
         $("#start").bind("tap", app.mapStarter);
@@ -28,8 +30,10 @@ var app = {
 
     //start the map
     mapStarter: function(event){
-       var map;
-        var position = {lat: 48, lng: 9.3};
+
+
+        var map;
+        var position = {lat: 48, lng: 9};
         // The map, center at position
         map = new google.maps.Map(document.getElementById('map'), {zoom: 4, center: position});
         // The marker

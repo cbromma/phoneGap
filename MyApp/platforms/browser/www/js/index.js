@@ -40,7 +40,6 @@ var app = {
     onCameraSuccess: function(imageData) {
         var image = document.getElementById('myImage');
         image.src = "data:image/jpeg;base64," + imageData;
-        alert("loaded");
     },
 
     onCameraFail: function(message) {

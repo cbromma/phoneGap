@@ -22,6 +22,17 @@
 	<div data-role="page" id="main">
 
 		<div data-role="header">
+
+			<form>
+				<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+					    <label for="select-native-14">Select A</label>
+					    <select name="select-native-14" id="select-native-14">
+					        <option value="#main" href="#main">Startseite</option>
+					        <option value="#bar">Gespeicherte Läufe</option>
+					    </select>
+				</fieldset>
+			</form>
+
 			<h1>Jogging-Support</h1>
 		</div>
 		<!-- /header -->
@@ -29,7 +40,8 @@
 		<div role="main" class="ui-content">
 			<p id="geolocation">Finding geolocation...</p>
 
-			<a href="" id="start">Start Lauf</a>
+			<a href="" id="start" class="ui-btn">Start Lauf</a>
+			<a href="" id="stop" class="ui-btn">Stop Lauf</a>
 
 			<img id="myImage" alt="" src="">
 

@@ -33,7 +33,7 @@ var app = {
 
 
         var map;
-        var position = {lat: 48, lng: 9};
+        var position = {lat: 48.4735492, lng: 7.9431655};
         // The map, center at position
         map = new google.maps.Map(document.getElementById('map'), {zoom: 4, center: position});
         // The marker

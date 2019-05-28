@@ -11,7 +11,7 @@ var runDuration = 0;
 var runDistance = 0;
 var runTrigger = false;
 
-var fs = require('fs');
+
 
 var app = {
 
@@ -81,6 +81,7 @@ var app = {
     	
     	// write object to file
     	var jsonData = JSON.stringify(currentRunObject);
+        var fs = require('fs');
     	fs.writeFile("././test.txt", jsonData, function(err) {
     	    if (err) {
     	        console.log(err);

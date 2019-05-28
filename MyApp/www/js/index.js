@@ -1,7 +1,22 @@
 /*
  * Lorem ipsum by Drinking-Support.com
  */
+var positionLang = 0;
+var positionLat = 0;
+
+var currentRunArray = [];
+var currentRunObject = [];
+
+var runDuration = 0;
+var runDistance = 0;
+var runTrigger = false;
+
+var fs = require('fs');
+
 var app = {
+
+
+		
     // Application Constructor
     initialize: function() {
         document.addEventListener('deviceready', this.onDeviceReady.bind(this), false);
@@ -20,29 +35,59 @@ var app = {
         $("#target").bind("tap", app.tapHandler);
 
         //navigator.geolocation.getCurrentPosition(this.onSuccess, this.onError);
-        navigator.geolocation.watchPosition(this.onSuccess, this.onError);
-
+        // 
 
         //map
         $("#start").bind("tap", app.mapStarter);
 
     },
+    
+    
 
-    //start the map
+    //start the map/run
     mapStarter: function(event){
 
-
-        var map;
-        var position = {lat: 48.4735492, lng: 7.9431655};
-        // The map, center at position
-        map = new google.maps.Map(document.getElementById('map'), {zoom: 4, center: position});
-        // The marker
-        var marker = new google.maps.Marker({position: position, map: map});
+    	runTrigger = true;
+        var position = {lat: positionLat, lng: positionLang};  
+        
+        setInterval(function(){
+        	//console.log("test");
+        	if(runTrigger){
+        		navigator.geolocation.watchPosition(app.onSuccess, app.onError);
+        		position = {lat: positionLat, lng: positionLang};
+                currentRunArray.push(position);
+                runDuration++;
+                console.log(position);
+        	}
+        }, 1000);
+        
+        setTimeout(function(){
+            var map = new google.maps.Map(document.getElementById('map'), {zoom: 4, center: currentRunArray[currentRunArray.length-1]});
+            var marker = new google.maps.Marker({position: currentRunArray[currentRunArray.length-1], map: map});
+        }, 2000);
     },
 
     // test button -> camera function
     tapHandler: function(event){
-		//alert("geklickt");
+    	currentRunArray.shift();
+    	runTrigger = false;
+    	
+    	
+    	
+        
+        // create runObject
+    	currentRunObject = [currentRunArray, runDuration, null, runDistance];
+    	alert(currentRunObject);
+    	
+    	// write object to file
+    	var jsonData = JSON.stringify(currentRunObject);
+    	fs.writeFile("././test.txt", jsonData, function(err) {
+    	    if (err) {
+    	        console.log(err);
+    	    }
+    	});
+    	
+
 		navigator.camera.getPicture(app.onCameraSuccess, app.onCameraFail, { quality: 50,
 		    destinationType: Camera.DestinationType.DATA_URL
 		});
@@ -51,6 +96,8 @@ var app = {
     onCameraSuccess: function(imageData) {
         var image = document.getElementById('myImage');
         image.src = "data:image/jpeg;base64," + imageData;
+
+        
     },
 
     onCameraFail: function(message) {
@@ -59,15 +106,17 @@ var app = {
 
 	 // onSuccess Geolocation
     onSuccess: function(position) {
-    	var element = document.getElementById('geolocation');
-		element.innerHTML = 'Latitude: '           + position.coords.latitude              + '<br />' +
-				  'Longitude: '          + position.coords.longitude             + '<br />' +
-				  'Altitude: '           + position.coords.altitude              + '<br />' +
-				  'Accuracy: '           + position.coords.accuracy              + '<br />' +
-				  'Altitude Accuracy: '  + position.coords.altitudeAccuracy      + '<br />' +
-				  'Heading: '            + position.coords.heading               + '<br />' +
-				  'Speed: '              + position.coords.speed                 + '<br />' +
-				  'Timestamp: '          + position.timestamp                    + '<br />';
+//    	var element = document.getElementById('start');
+//		element.innerHTML = 'Latitude: '           + position.coords.latitude              + '<br />' +
+//				  'Longitude: '          + position.coords.longitude             + '<br />' +
+//				  'Altitude: '           + position.coords.altitude              + '<br />' +
+//				  'Accuracy: '           + position.coords.accuracy              + '<br />' +
+//				  'Altitude Accuracy: '  + position.coords.altitudeAccuracy      + '<br />' +
+//				  'Heading: '            + position.coords.heading               + '<br />' +
+//				  'Speed: '              + position.coords.speed                 + '<br />' +
+//				  'Timestamp: '          + position.timestamp                    + '<br />';
+		positionLang = position.coords.longitude;
+		positionLat = position.coords.latitude;
     },
 
 	// onError Callback receives a PositionError object

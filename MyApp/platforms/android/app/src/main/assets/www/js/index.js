@@ -4,6 +4,8 @@
 var positionLang = 0;
 var positionLat = 0;
 var map = 0;
+var startMarker = 0;
+var currentMarker = 0;
 
 var currentRunArray = [];
 var currentRunObject = [];
@@ -58,12 +60,22 @@ var app = {
         			currentRunArray.push({lat: positionLat, lng: positionLang});
         			console.log("Lat: "+ positionLat + " Lng: " + positionLang);
         		} 
+        		
+        		setInterval(function(){
+        			// place marker at current position
+        			currentMarker = new google.maps.Marker({position: currentRunArray[currentRunArray.length-1], map: map});
+        		}, 2000);
+        			
         	}
         }, 1000);
         
         setTimeout(function(){
-            map = new google.maps.Map(document.getElementById('map'), {zoom: 16, center: currentRunArray[currentRunArray.length-1]});
-            var marker = new google.maps.Marker({position: currentRunArray[currentRunArray.length-1], map: map});
+            map = new google.maps.Map(document.getElementById('map'), {zoom: 18, center: currentRunArray[currentRunArray.length-1]});
+            
+            if(startMarker == 0){
+            	startMarker = new google.maps.Marker({position: currentRunArray[currentRunArray.length-1], map: map});
+            }
+            
         }, 2000);
     },
 
@@ -74,10 +86,6 @@ var app = {
     	
     	// do picture
 		navigator.camera.getPicture(app.onCameraSuccess, app.onCameraFail, { quality: 50,destinationType: Camera.DestinationType.DATA_URL});
-		
-
-
-        //var marker = new google.maps.Marker({position: currentRunArray[currentRunArray.length-1], map: map});
     },
     
     calcDistance: function(lat1, lon1, lat2, lon2) {
@@ -183,7 +191,7 @@ var app = {
         //console.log("Lat: "+ position.coords.latitude + " Lng: " + position.coords.longitude);
        
     	// test
-        document.getElementById('output').innerHTML =  position.coords.latitude+ "      " + position.coords.longitude;
+        //document.getElementById('output').innerHTML =  position.coords.latitude+ "      " + position.coords.longitude;
     },
 
 	// onError Callback receives a PositionError object

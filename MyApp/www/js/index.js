@@ -54,15 +54,15 @@ var app = {
         		navigator.geolocation.watchPosition(app.onSuccess, app.onError);
         		//var position = {lat: positionLat, lng: positionLang};
         		if(positionLat != 0 && positionLang != 0){
-                    currentRunArray.push({lat: positionLat, lng: positionLang});
-
-        		}
-                //console.log("Lat: "+ positionLat + " Lng: " + positionLang);
+                    //currentRunArray.push({lat: positionLat, lng: positionLang});
+        			currentRunArray.push({lat: positionLat, lng: positionLang});
+        			console.log("Lat: "+ positionLat + " Lng: " + positionLang);
+        		} 
         	}
         }, 1000);
         
         setTimeout(function(){
-            map = new google.maps.Map(document.getElementById('map'), {zoom: 4, center: currentRunArray[currentRunArray.length-1]});
+            map = new google.maps.Map(document.getElementById('map'), {zoom: 16, center: currentRunArray[currentRunArray.length-1]});
             var marker = new google.maps.Marker({position: currentRunArray[currentRunArray.length-1], map: map});
         }, 2000);
     },
@@ -73,58 +73,11 @@ var app = {
     	runTrigger = false;
     	
     	// do picture
-		navigator.camera.getPicture(app.onCameraSuccess, app.onCameraFail, { quality: 50,
-		    destinationType: Camera.DestinationType.DATA_URL
-		});
+		navigator.camera.getPicture(app.onCameraSuccess, app.onCameraFail, { quality: 50,destinationType: Camera.DestinationType.DATA_URL});
+		
 
-		// calc distance
-		for(var i = 0; i < currentRunArray.length - 2; i++){
-			runDistance += app.calcDistance(currentRunArray[i].lat, currentRunArray[i].lng, currentRunArray[i + 1].lat, currentRunArray[i + 1].lng);
-		}
-		// positionLat, lng: positionLang
-		// (lat1, lon1, lat2, lon2)
-		//alert(runDistance);
 
-        runDuration = Date.now() - startTimer;
-		// create runObject / marker positions / duration / picture / distance
-    	currentRunObject = [currentRunArray, runDuration, picture, runDistance];
-    	//alert(currentRunObject);
-    	
-    	// write object to file
-    	var jsonData = JSON.stringify(currentRunObject);
-
-    	
-    	window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem){
-            fileSystem.root.getFile("saved_runs.txt", {create: true, exclusive: false}, function(fileEntry){
-                fileEntry.createWriter(function(writer){
-                    //von Nico kopiert und muss geändert werden
-                    if(writer.length <= 5){
-                        writer.write(jsonData);
-                        //alert("Hat gespeichert");
-                    }
-                }, app.onError);
-            }, app.onError);
-        }, null);
-
-        document.getElementById('output').innerHTML = "Strecke: " + (runDistance*1000) + ", Zeit:" + runDuration;
-
-        var path = new google.maps.Polyline({
-            path: currentRunArray,
-            geodesic: true,
-            strokeColor: '#FF0000',
-            strokeOpacity: 1.0,
-            strokeWeight: 2
-        });
-
-        path.setMap(map);
-
-        //endmarker
-        var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
-        var marker = new google.maps.Marker({
-            position: currentRunArray[currentRunArray.length-1],
-            map: map,
-            icon: iconBase + picture
-        });
+        //var marker = new google.maps.Marker({position: currentRunArray[currentRunArray.length-1], map: map});
     },
     
     calcDistance: function(lat1, lon1, lat2, lon2) {
@@ -151,9 +104,59 @@ var app = {
     
     onCameraSuccess: function(imageData) {
         var image = document.getElementById('myImage');
-        image.src = "data:image/jpeg;base64," + imageData;
+        image.src = "data:image/png;base64," + imageData;
 
-        picture = imageData;
+        picture = image.src;
+
+		// calc distance
+		for(var i = 0; i < currentRunArray.length - 2; i++){
+			runDistance += app.calcDistance(currentRunArray[i].lat, currentRunArray[i].lng, currentRunArray[i + 1].lat, currentRunArray[i + 1].lng);
+		}
+
+		// calc duration
+        runDuration = Date.now() - startTimer;
+		// create runObject / marker positions / duration / picture / distance
+    	currentRunObject = [currentRunArray, runDuration, picture, runDistance];
+
+    	// write object to file
+    	var jsonData = JSON.stringify(currentRunObject);
+    	window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem){
+            fileSystem.root.getFile("saved_runs.txt", {create: true, exclusive: false}, function(fileEntry){
+                fileEntry.createWriter(function(writer){
+                    //von Nico kopiert und muss geändert werden
+                    if(writer.length <= 5){
+                        writer.write(jsonData);
+                        //alert("Hat gespeichert");
+                    }
+                }, app.onError);
+            }, app.onError);
+        }, null);
+
+        document.getElementById('output').innerHTML = "Strecke: " + (runDistance*1000) + ", Zeit:" + runDuration;
+
+        // draw path on map
+        var path = new google.maps.Polyline({
+            path: currentRunArray,
+            geodesic: true,
+            strokeColor: '#FF0000',
+            strokeOpacity: 1.0,
+            strokeWeight: 2
+        });
+
+        path.setMap(map);
+
+        //endmarker     
+        var icon = {
+        	url: picture,
+            scaledSize: new google.maps.Size(50,50),
+        };
+
+        //alert(currentRunArray[currentRunArray.length - 1].lat + "   " + currentRunArray[currentRunArray.length - 1].lng);
+        var marker = new google.maps.Marker({
+        	position: new google.maps.LatLng(currentRunArray[currentRunArray.length - 1].lat, currentRunArray[currentRunArray.length - 1].lng), //currentRunArray[currentRunArray.length-1], //new google.maps.LatLng(0, 0)
+        	map: map,
+            icon: icon
+        });
     },
 
     onCameraFail: function(message) {
@@ -172,11 +175,15 @@ var app = {
 //				  'Speed: '              + position.coords.speed                 + '<br />' +
 //				  'Timestamp: '          + position.timestamp                    + '<br />';
 
-        if(position.coords.latitude != 0 && position.coords.longitude != 0){
-            currentRunArray.push({lat: position.coords.latitude, lng: position.coords.longitude});
-            runDuration++;
-        }
-        //document.getElementById('output').innerHTML =  position.coords.latitude+ " " + position.coords.longitude;
+    	positionLang = position.coords.longitude;
+    	positionLat = position.coords.latitude;
+//    	if(position.coords.latitude != 0 && position.coords.longitude != 0){
+//            currentRunArray.push({lat: position.coords.latitude, lng: position.coords.longitude});
+//        }
+        //console.log("Lat: "+ position.coords.latitude + " Lng: " + position.coords.longitude);
+       
+    	// test
+        document.getElementById('output').innerHTML =  position.coords.latitude+ "      " + position.coords.longitude;
     },
 
 	// onError Callback receives a PositionError object

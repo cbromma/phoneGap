@@ -5,7 +5,6 @@ var positionLang = 0;
 var positionLat = 0;
 var map = 0;
 var startMarker = 0;
-var currentMarker = 0;
 
 var currentRunArray = [];
 var currentRunObject = [];
@@ -35,12 +34,8 @@ var app = {
         //camera
         $("#target").bind("tap", app.tapHandler);
 
-        //navigator.geolocation.getCurrentPosition(this.onSuccess, this.onError);
-        // 
-
         //map
         $("#start").bind("tap", app.mapStarter);
-
     },
 
     // start button -> start the map/run
@@ -49,7 +44,7 @@ var app = {
     	runTrigger = true;
         var position = 0;
         startTimer = Date.now();
-        
+
         setInterval(function(){
         	//console.log("test");
         	if(runTrigger){
@@ -60,22 +55,12 @@ var app = {
         			currentRunArray.push({lat: positionLat, lng: positionLang});
         			console.log("Lat: "+ positionLat + " Lng: " + positionLang);
         		} 
-        		
-        		setInterval(function(){
-        			// place marker at current position
-        			currentMarker = new google.maps.Marker({position: currentRunArray[currentRunArray.length-1], map: map});
-        		}, 2000);
-        			
         	}
         }, 1000);
         
         setTimeout(function(){
-            map = new google.maps.Map(document.getElementById('map'), {zoom: 18, center: currentRunArray[currentRunArray.length-1]});
-            
-            if(startMarker == 0){
-            	startMarker = new google.maps.Marker({position: currentRunArray[currentRunArray.length-1], map: map});
-            }
-            
+            map = new google.maps.Map(document.getElementById('map'), {zoom: 16, center: currentRunArray[currentRunArray.length-1]});
+            startMarker = new google.maps.Marker({position: currentRunArray[currentRunArray.length-1], map: map});
         }, 2000);
     },
 
@@ -139,8 +124,9 @@ var app = {
                 }, app.onError);
             }, app.onError);
         }, null);
-
-        document.getElementById('output').innerHTML = "Strecke: " + (runDistance*1000) + ", Zeit:" + runDuration;
+    	
+    	// output
+        document.getElementById('output').innerHTML = "Strecke: " + (runDistance*1000) + "m, Zeit: " + app.msToHMS(runDuration);
 
         // draw path on map
         var path = new google.maps.Polyline({
@@ -166,6 +152,18 @@ var app = {
             icon: icon
         });
     },
+    
+    msToHMS: function(duration) { 
+    	var milliseconds = parseInt((duration % 1000) / 100), 
+    	seconds = parseInt((duration / 1000) % 60), 
+    	minutes = parseInt((duration / (1000 * 60)) % 60), 
+    	hours = parseInt((duration / (1000 * 60 * 60)) % 24); 
+    	
+    	hours = (hours < 10) ? "0" + hours : hours; 
+    	minutes = (minutes < 10) ? "0" + minutes : minutes; 
+    	seconds = (seconds < 10) ? "0" + seconds : seconds; 
+    	return hours + ":" + minutes + ":" + seconds ; 
+    },
 
     onCameraFail: function(message) {
         alert('Failed because: ' + message);
@@ -182,16 +180,8 @@ var app = {
 //				  'Heading: '            + position.coords.heading               + '<br />' +
 //				  'Speed: '              + position.coords.speed                 + '<br />' +
 //				  'Timestamp: '          + position.timestamp                    + '<br />';
-
     	positionLang = position.coords.longitude;
     	positionLat = position.coords.latitude;
-//    	if(position.coords.latitude != 0 && position.coords.longitude != 0){
-//            currentRunArray.push({lat: position.coords.latitude, lng: position.coords.longitude});
-//        }
-        //console.log("Lat: "+ position.coords.latitude + " Lng: " + position.coords.longitude);
-       
-    	// test
-        //document.getElementById('output').innerHTML =  position.coords.latitude+ "      " + position.coords.longitude;
     },
 
 	// onError Callback receives a PositionError object

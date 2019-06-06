@@ -10,12 +10,14 @@ var historyApp =  {
     onDeviceReady: function() {
         // delete event
         $("#start").bind("tap", app.mapStarter);
-        this.showRunList();
+        alert("fuck this shit");
+        historyApp.showRunList();
     },
     
     showRunList: function(){
     	window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem){
 			fileSystem.root.getFile("saved_runs.txt", null, function(fileEntry){
+				alert("file found");
 				fileEntry.file(function(file){
 					var reader = new FileReader();
 					reader.readAsText(file);

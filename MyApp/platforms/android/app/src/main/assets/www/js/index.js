@@ -41,6 +41,8 @@ var app = {
     // start button -> start the map/run
     mapStarter: function(event){
 
+    	app.resetGlobalVariables();
+    	
     	runTrigger = true;
         var position = 0;
         startTimer = Date.now();
@@ -53,7 +55,6 @@ var app = {
         		if(positionLat != 0 && positionLang != 0){
                     //currentRunArray.push({lat: positionLat, lng: positionLang});
         			currentRunArray.push({lat: positionLat, lng: positionLang});
-        			console.log("Lat: "+ positionLat + " Lng: " + positionLang);
         		} 
         	}
         }, 1000);
@@ -171,15 +172,6 @@ var app = {
 
 	 // onSuccess Geolocation
     onSuccess: function(position) {
-//    	var element = document.getElementById('start');
-//		element.innerHTML = 'Latitude: '           + position.coords.latitude              + '<br />' +
-//				  'Longitude: '          + position.coords.longitude             + '<br />' +
-//				  'Altitude: '           + position.coords.altitude              + '<br />' +
-//				  'Accuracy: '           + position.coords.accuracy              + '<br />' +
-//				  'Altitude Accuracy: '  + position.coords.altitudeAccuracy      + '<br />' +
-//				  'Heading: '            + position.coords.heading               + '<br />' +
-//				  'Speed: '              + position.coords.speed                 + '<br />' +
-//				  'Timestamp: '          + position.timestamp                    + '<br />';
     	positionLang = position.coords.longitude;
     	positionLat = position.coords.latitude;
     },
@@ -200,6 +192,22 @@ var app = {
 
         console.log('Received Event: ' + id);
     },
+    
+    resetGlobalVariables: function(){
+    	positionLang = 0;
+    	positionLat = 0;
+    	map = 0;
+    	startMarker = 0;
+
+    	currentRunArray = [];
+    	currentRunObject = [];
+
+    	startTimer = 0;
+    	runDuration = 0;
+    	runDistance = 0;
+    	runTrigger = false;
+    	picture = 0;
+    }
 };
 
 app.initialize();

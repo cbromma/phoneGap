@@ -1,4 +1,4 @@
-var history =  {
+var historyApp =  {
 	initialize: function(){
 		document.addEventListener('deviceready', this.onDeviceReady.bind(this), false);
 	},
@@ -29,7 +29,7 @@ var history =  {
     
     parseFile: function(event){
     	alert(JSON.parse(event));
-    }
+    },
 };
 
-history.initialize();
+historyApp.initialize();

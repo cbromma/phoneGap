@@ -9,9 +9,12 @@ var historyApp =  {
 	
     onDeviceReady: function() {
         // delete event
-        $("#start").bind("tap", app.mapStarter);
-        alert("fuck this shit");
-        historyApp.showRunList();
+    	$("#linkToRunList").bind("tap", historyApp.tapHandler);
+    },
+    
+    tapHandler: function(event){
+    	alert("hello world");
+    	historyApp.showRunList();
     },
     
     showRunList: function(){
@@ -33,5 +36,3 @@ var historyApp =  {
     	alert(JSON.parse(event));
     },
 };
-
-historyApp.initialize();

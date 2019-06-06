@@ -25,7 +25,7 @@ var historyApp =  {
 					var reader = new FileReader();
 					reader.readAsText(file);
 					reader.onloadend = function(evt) {
-						history.parseFile(evt);
+						historyApp.parseFile(evt);
 					};
 				}, null);
 			}, null);

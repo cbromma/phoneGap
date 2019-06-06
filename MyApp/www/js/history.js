@@ -10,7 +10,7 @@ var history =  {
     onDeviceReady: function() {
         // delete event
         $("#start").bind("tap", app.mapStarter);
-        this.showRunList;
+        this.showRunList();
     },
     
     showRunList: function(){
@@ -30,4 +30,6 @@ var history =  {
     parseFile: function(event){
     	alert(JSON.parse(event));
     }
-}
+};
+
+history.initialize();

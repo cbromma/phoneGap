@@ -50,7 +50,7 @@ var app = {
         setInterval(function(){
         	//console.log("test");
         	if(runTrigger){
-        		navigator.geolocation.watchPosition(app.onSuccess, app.onError);
+        		navigator.geolocation.watchPosition(app.onSuccess, app.onError, {enableHighAccuracy: true});
         		//var position = {lat: positionLat, lng: positionLang};
         		if(positionLat != 0 && positionLang != 0){
                     //currentRunArray.push({lat: positionLat, lng: positionLang});

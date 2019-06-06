@@ -36,3 +36,5 @@ var historyApp =  {
     	alert(JSON.parse(event));
     },
 };
+
+historyApp.initialize();

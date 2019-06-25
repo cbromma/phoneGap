@@ -11,15 +11,83 @@ var historyApp = {
 	onDeviceReady : function() {
 		// delete event
 		$("#linkToRunList").bind("tap", historyApp.tapHandler);
+		$("#deleteAll").bind("tap", historyApp.deleteAll);
 	},
 
 	tapHandler : function(event) {
 		historyApp.showRunList();
 	},
 
-	loadRunData : function() {
-		alert("loaded");
-		// TODO load run data to first page
+	loadRunData : function(index) {
+		var current = 0;
+		
+		var map = 0;
+		var startMarker = 0;
+		var currentRunArray = [];
+		var runDuration = 0;
+		var runDistance = 0;
+		var picture = 0;
+		
+		// read from file
+		window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(
+				fileSystem) {
+			fileSystem.root.getFile("saved_runs.txt", null,
+					function(fileEntry) {
+						fileEntry.file(function(file) {
+							var reader = new FileReader();
+							reader.readAsText(file);
+							reader.onloadend = function(evt) {
+								try {
+									var value = index
+											.substring(4, index.length);
+									json = JSON.parse(evt.target.result);
+									current = json.not_a_table.splice(
+											value, 1);
+									currentRunArray = current[0].runs;
+									startMarker = currentRunArray[0];
+									runDuration = current[0].runDuration;
+									runDistance = current[0].runDistance;
+									picture = current[0].pic;
+									
+									map = new google.maps.Map(document.getElementById('map'), {zoom: 16, center: currentRunArray[currentRunArray.length-1]});
+							         startMarker = new google.maps.Marker({position: currentRunArray[currentRunArray.length-1], map: map});
+									
+									// output
+							        document.getElementById('output').innerHTML = "Strecke: " + (runDistance*1000) + "m, Zeit: " + historyApp.msToHMS(runDuration);
+
+							        // draw path on map
+							        var path = new google.maps.Polyline({
+							            path: currentRunArray,
+							            geodesic: true,
+							            strokeColor: '#FF0000',
+							            strokeOpacity: 1.0,
+							            strokeWeight: 2
+							        });
+
+							        path.setMap(map);
+
+							        //endmarker     
+							        var icon = {
+							        	url: picture,
+							            scaledSize: new google.maps.Size(50,50),
+							        };						
+
+							        //alert(currentRunArray[currentRunArray.length - 1].lat + "   " + currentRunArray[currentRunArray.length - 1].lng);
+							         var marker = new google.maps.Marker({
+							        	 position: new google.maps.LatLng(currentRunArray[currentRunArray.length - 1].lat, currentRunArray[currentRunArray.length - 1].lng), //currentRunArray[currentRunArray.length-1], //new google.maps.LatLng(0, 0)
+							             map: map,
+							             icon: icon
+							         });
+								} catch (e) {
+									alert(e.message);
+								}
+								
+								
+							};
+						}, historyApp.fail);
+					}, historyApp.fail);
+		}, null);
+					
 	},
 
 	deleteRunData : function(index) {
@@ -54,28 +122,13 @@ var historyApp = {
 										create : true,
 										exclusive : false
 									}, function(fileEntry) {
-										fileEntry.createWriter(function(writer) {			
-											var exist = false;
-											for (var i = 0; i < json.not_a_table.length; i++) {
-												
-												if (json.not_a_table[i]) {
-													if (!exist) {
-														alert("if");
-														
-														exist = true;
-														var jsonT = { not_a_table : [ json.not_a_table[i] ]};
-														writer.write(JSON.stringify(jsonT));
-													} else {
-														alert("else");
-														try {
-															writer.seek(writer.length - 2);
-														} catch (e) {
-															alert(e.message);
-														}
-														writer.write("," + JSON.stringify(json.not_a_table[i]) + "]}");
-													}
-												} 
-											} // end of for
+										fileEntry.createWriter(function(writer) {	
+											if (json.length == 0 || json.not_a_table.length == 0){
+												writer.write(JSON.stringify(""));
+											} else {
+												writer.write(JSON.stringify(json));
+											}
+											historyApp.showRunList();
 										}, null);
 									}, null);
 								}, null);
@@ -84,6 +137,21 @@ var historyApp = {
 							};
 						}, historyApp.fail);
 					}, historyApp.fail);
+		}, null);
+	},
+	
+	deleteAll: function(){
+		window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(
+				fileSystem) {
+			fileSystem.root.getFile("saved_runs.txt", {
+				create : true,
+				exclusive : false
+			}, function(fileEntry) {
+				fileEntry.createWriter(function(writer) {	
+					writer.write(JSON.stringify(""));
+					historyApp.showRunList();
+				}, null);
+			}, null);
 		}, null);
 	},
 
@@ -111,6 +179,10 @@ var historyApp = {
 		// alert(JSON.parse(evt.target.result));
 		var json = JSON.parse(evt.target.result);
 		var id = document.getElementById("runlist");
+		if(!json || json == null || json == "" || json.not_a_table.length == 0){
+			id.innerHTML = "";
+			return;
+		}
 		id.innerHTML = "";
 		id.innerHTML += "<ul>";
 
@@ -132,24 +204,18 @@ var historyApp = {
 		for (var j = 0; j < json.not_a_table.length; j++) {
 			var name = "#load" + j;
 			// alert(name);
-			try {
-				$("" + name).bind("tap", historyApp.loadRunData);
-			} catch (e) {
-				alert(e.message);
-			}
+				$("" + name).click(function(event) {
+					historyApp.loadRunData(event.target.id);
+				});
 		}
 
 		// bind delete buttons
 		for (var i = 0; i < json.not_a_table.length; i++) {
 			var name = "#delete" + i;
 			// alert(name);
-			try {
 				$("" + name).click(function(event) {
 					historyApp.deleteRunData(event.target.id);
 				});
-			} catch (e) {
-				alert(e.message);
-			}
 		}
 
 	},

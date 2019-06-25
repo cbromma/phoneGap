@@ -9,7 +9,23 @@
     </author>
     <content src="index.html" />
     <plugin name="cordova-plugin-whitelist" spec="1" />
+
+    <!-- Allow images, xhrs, etc. to google.com -->
+    <access origin="http://google.com" />
+    <access origin="https://google.com" />
+
+    <!-- Access to the subdomain maps.google.com -->
+    <access origin="http://maps.google.com" />
+
+    <!-- Access to all the subdomains on google.com -->
+    <access origin="http://*.google.com" />
+
+    <!-- Enable requests to content: URLs -->
+    <access origin="content:///*" />
+
+    <!-- Don't block any requests -->
     <access origin="*" />
+  
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
     <allow-intent href="tel:*" />

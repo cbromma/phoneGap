@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="io.cordova.hellocordova" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>Jogging-Support</name>
+    <description>
+        A sample Apache Cordova application that responds to the deviceready event.
+    </description>
+    <author email="dev@cordova.apache.org" href="http://cordova.io">
+        Apache Cordova Team
+    </author>
+    <content src="index.html" />
+
+    <!-- Allow images, xhrs, etc. to google.com -->
+    <access origin="*.google.com" />
+  
+    <access origin="*.googleapis.com" />
+
+    <!-- Enable requests to content: URLs -->
+    <access origin="content:///*" />
+
+    <!-- Don't block any requests -->
+    <access origin="*" />
+  
+  <allow-navigation href="*"/>
+  <allow-intent href="*"/>
+  
+  <preference name="phonegap-version" value="cli-8.1.1"/>
+  <plugin name="cordova-plugin-camera" spec="4.0.3" source="npm"/>
+  <plugin name="cordova-plugin-whitelist" spec="1.3.3" source="npm"/>
+  <plugin name="cordova-plugin-file" spec="6.0.1" source="npm"/>
+  <plugin name="cordova-plugin-geolocation" spec="4.0.1" source="npm"/>
+
+</widget>

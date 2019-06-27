@@ -663,6 +663,81 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
       "clobbers": [
         "window.FileTransfer"
       ]
+    },
+    {
+      "id": "cordova-plugin-globalization.GlobalizationError",
+      "file": "plugins/cordova-plugin-globalization/www/GlobalizationError.js",
+      "pluginId": "cordova-plugin-globalization",
+      "clobbers": [
+        "window.GlobalizationError"
+      ]
+    },
+    {
+      "id": "cordova-plugin-globalization.globalization",
+      "file": "plugins/cordova-plugin-globalization/www/globalization.js",
+      "pluginId": "cordova-plugin-globalization",
+      "clobbers": [
+        "navigator.globalization"
+      ]
+    },
+    {
+      "id": "cordova-plugin-inappbrowser.inappbrowser",
+      "file": "plugins/cordova-plugin-inappbrowser/www/inappbrowser.js",
+      "pluginId": "cordova-plugin-inappbrowser",
+      "clobbers": [
+        "cordova.InAppBrowser.open",
+        "window.open"
+      ]
+    },
+    {
+      "id": "cordova-plugin-media.MediaError",
+      "file": "plugins/cordova-plugin-media/www/MediaError.js",
+      "pluginId": "cordova-plugin-media",
+      "clobbers": [
+        "window.MediaError"
+      ]
+    },
+    {
+      "id": "cordova-plugin-media.Media",
+      "file": "plugins/cordova-plugin-media/www/Media.js",
+      "pluginId": "cordova-plugin-media",
+      "clobbers": [
+        "window.Media"
+      ]
+    },
+    {
+      "id": "cordova-plugin-network-information.network",
+      "file": "plugins/cordova-plugin-network-information/www/network.js",
+      "pluginId": "cordova-plugin-network-information",
+      "clobbers": [
+        "navigator.connection",
+        "navigator.network.connection"
+      ]
+    },
+    {
+      "id": "cordova-plugin-network-information.Connection",
+      "file": "plugins/cordova-plugin-network-information/www/Connection.js",
+      "pluginId": "cordova-plugin-network-information",
+      "clobbers": [
+        "Connection"
+      ]
+    },
+    {
+      "id": "cordova-plugin-statusbar.statusbar",
+      "file": "plugins/cordova-plugin-statusbar/www/statusbar.js",
+      "pluginId": "cordova-plugin-statusbar",
+      "clobbers": [
+        "window.StatusBar"
+      ]
+    },
+    {
+      "id": "cordova-plugin-vibration.notification",
+      "file": "plugins/cordova-plugin-vibration/www/vibration.js",
+      "pluginId": "cordova-plugin-vibration",
+      "merges": [
+        "navigator.notification",
+        "navigator"
+      ]
     }
   ];
   module.exports.metadata = {
@@ -679,6 +754,12 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
     "cordova-plugin-device-motion": "1.2.5",
     "cordova-plugin-device-orientation": "1.0.7",
     "cordova-plugin-dialogs": "1.2.1",
-    "cordova-plugin-file-transfer": "1.5.1"
+    "cordova-plugin-file-transfer": "1.5.1",
+    "cordova-plugin-globalization": "1.0.9",
+    "cordova-plugin-inappbrowser": "1.3.0",
+    "cordova-plugin-media": "2.2.0",
+    "cordova-plugin-network-information": "1.2.1",
+    "cordova-plugin-statusbar": "2.1.3",
+    "cordova-plugin-vibration": "2.1.6"
   };
 });

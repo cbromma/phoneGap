@@ -95,6 +95,10 @@
                         {
                             "xml": "<feature name=\"Contacts\"><param name=\"android-package\" value=\"org.apache.cordova.contacts.ContactManager\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Device\"><param name=\"android-package\" value=\"org.apache.cordova.device.Device\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -239,6 +243,9 @@
             "PACKAGE_NAME": "com.phonegap.helloworld"
         },
         "cordova-plugin-contacts": {
+            "PACKAGE_NAME": "com.phonegap.helloworld"
+        },
+        "cordova-plugin-device": {
             "PACKAGE_NAME": "com.phonegap.helloworld"
         }
     },
@@ -827,6 +834,14 @@
             "merges": [
                 ""
             ]
+        },
+        {
+            "id": "cordova-plugin-device.device",
+            "file": "plugins/cordova-plugin-device/www/device.js",
+            "pluginId": "cordova-plugin-device",
+            "clobbers": [
+                "device"
+            ]
         }
     ],
     "plugin_metadata": {
@@ -838,6 +853,7 @@
         "cordova-plugin-battery-status": "1.1.2",
         "cordova-plugin-media-capture": "1.2.0",
         "cordova-plugin-console": "1.0.7",
-        "cordova-plugin-contacts": "2.0.1"
+        "cordova-plugin-contacts": "2.0.1",
+        "cordova-plugin-device": "1.1.7"
     }
 }

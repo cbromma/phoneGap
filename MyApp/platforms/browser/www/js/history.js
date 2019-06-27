@@ -179,7 +179,7 @@ var historyApp = {
 		// alert(JSON.parse(evt.target.result));
 		var json = JSON.parse(evt.target.result);
 		var id = document.getElementById("runlist");
-		if(!json || json == null || json == "" || json.not_a_table.length == 0){
+		if(!json || json == null || json == "" || json.not_a_table.length == 0 || !json.not_a_table){
 			id.innerHTML = "";
 			return;
 		}
